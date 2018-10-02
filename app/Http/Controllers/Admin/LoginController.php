@@ -70,11 +70,9 @@ class LoginController extends Controller {
 
 
     private function checkAuth($username) {
-       $Admin=Admin::join('groups','groups.id','=','admins.group_id')
-               ->where('groups.active',1)
-               ->where('admins.active',1)
-               ->where('admins.username',$username)
-               ->select('admins.*')
+       $Admin=Admin::where('active',1)
+               ->where('username',$username)
+               ->select('*')
                ->first();
         if ($Admin) {
             return $Admin;
